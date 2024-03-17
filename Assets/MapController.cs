@@ -5,42 +5,11 @@ using UnityEngine.UI;
 
 public class MapController : MonoBehaviour
 {
+	[SerializeField] GameObject streets;
 	
-	[SerializeField] List<Sprite> mapSprites;
-	
-	private int currentSprite = 0;
-    
-	public void NextSprite() 
+	public void ChangeStreets() 
 	{
-		if (currentSprite < (mapSprites.Count - 1)) 
-		{
-			currentSprite += 1;	
-		}
-		else 
-		{
-			currentSprite = 0;
-		}
-		
-		UpdateSprite();
-	}
-	
-	public void PrevSprite() 
-	{
-		if (currentSprite > 0) 
-		{
-			currentSprite -= 1;	
-		}
-		else 
-		{
-			currentSprite = (mapSprites.Count - 1);
-		}
-		
-		UpdateSprite();
-	}
-	
-	private void UpdateSprite() 
-	{
-		transform.GetChild(0).GetComponent<Image>().sprite = mapSprites[currentSprite];
+		streets.SetActive(!streets.activeSelf);
 	}
     
 }
