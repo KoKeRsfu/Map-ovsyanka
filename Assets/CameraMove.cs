@@ -5,6 +5,9 @@ using Cinemachine;
 
 public class CameraMove : MonoBehaviour
 {
+	[SerializeField] float xbound1;
+	[SerializeField] float xbound2;
+	
 	private Vector3 Origin;
 	private Vector3 Difference;
 
@@ -33,7 +36,7 @@ public class CameraMove : MonoBehaviour
 		{
 			Camera.main.transform.position = Origin - Difference;
 			Camera.main.transform.position = new Vector3(
-			Mathf.Clamp(Camera.main.transform.position.x, (-10 + cam.orthographicSize) * 1.778f, (10 - cam.orthographicSize) * 1.778f),
+				Mathf.Clamp(Camera.main.transform.position.x, (xbound1 + cam.orthographicSize) * 1.778f, (xbound2 - cam.orthographicSize) * 1.778f),
 			Mathf.Clamp(Camera.main.transform.position.y, -10 + cam.orthographicSize, 10 - cam.orthographicSize), transform.position.z);
 		}
 	}

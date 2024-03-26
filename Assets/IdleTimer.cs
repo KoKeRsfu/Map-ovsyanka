@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IdleTimer : MonoBehaviour
 {
@@ -9,20 +10,26 @@ public class IdleTimer : MonoBehaviour
  float last_ui = 0.0f;
  bool idle = false;
 
+ protected void Awake()
+ {
+	 last_ui = Time.time;
+ }
+
  void FixedUpdate() 
  { 
 	 if (Input.anyKeyDown) 
 		 {
-		 if (idle) 
-		 {
-			 idle = false;
-		 } 
 		 last_ui = Time.time;
 		}
 	 if ( ( Time.time - last_ui ) > idle_lim ) { 
-		 idle = true;
-		 this.GetComponent<FrameManager>().SetFrame(0);
+		 last_ui = Time.time;
+		 ReloadScene();
 	 } 
+ }
+ 
+ public void ReloadScene() 
+ {
+	 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
  }
  
 }

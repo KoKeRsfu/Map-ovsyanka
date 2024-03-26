@@ -20,12 +20,24 @@ public class ListItemExpander : MonoBehaviour
 		content = transform.GetChild(2).gameObject;
 		numberIcon = transform.GetChild(1).GetChild(0).GetComponent<Image>();
 		number = transform.GetChild(1).GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
-		name = transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>();
+		name = transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
 	}
 
 
-	public void Expand() 
+	public void Expand(int a) 
 	{
+		if (a == -1) 
+		{
+			content.SetActive(false);
+			lineTop.SetActive(false);
+			lineBottom.SetActive(false);
+			
+			numberIcon.color = new Color(1,1,1,1);
+			number.color = new Color(0,0,0,1);
+			name.color = new Color(0,0,0,1);
+			return;
+		}
+		
 		if (content.activeSelf)
 		{
 			content.SetActive(false);
@@ -56,6 +68,11 @@ public class ListItemExpander : MonoBehaviour
 			lineBottom.SetActive(false);
 		}
 		else  contentGroup.enabled = true;
+	}
+
+	public void CloseAllForContent() 
+	{
+		transform.parent.GetComponent<ContentAdder>().CloseAll(this.transform.GetSiblingIndex());
 	}
 
 }

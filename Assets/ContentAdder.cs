@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using TMPro;
+using UnityEngine.UI;
 
 public class ContentAdder : MonoBehaviour
 {
 	[SerializeField] TextAsset contentText;
+	public Transform outlines;
 
     void Start()
     {
@@ -28,7 +30,8 @@ public class ContentAdder : MonoBehaviour
 	    	{
 	    		if (current[0] == plus[0]) 
 	    		{
-	    				
+	    			string photoPath = "Ovsyanka_Map/Photos/" + currentItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text;
+		    		currentItem.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(photoPath);
 	    		}
 	    		else Destroy(currentItem.transform.GetChild(2).GetChild(0).gameObject);
 	    		
@@ -50,7 +53,7 @@ public class ContentAdder : MonoBehaviour
 	    			prevStreet = current;
 		    			break;
 	    		case 3:
-	    			currentItem.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = current;
+	    			currentItem.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = current;
 		    			break;
 	    		case 4:
 	    			if (current != "") 
@@ -67,6 +70,14 @@ public class ContentAdder : MonoBehaviour
 	    		current = current + content[i];		
 	    	}
 	    }
+	    
+	    if (current[0] == plus[0]) 
+	    {
+		    string photoPath = "Ovsyanka_Map/Photos/" + currentItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text;
+		    currentItem.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(photoPath);
+	    }
+	    else Destroy(currentItem.transform.GetChild(2).GetChild(0).gameObject);
+	    		
     }
     
 	private GameObject CreateItem() 
@@ -80,5 +91,21 @@ public class ContentAdder : MonoBehaviour
 		temp.GetComponent<TextMeshProUGUI>().text = name;
 		
 		temp.transform.SetSiblingIndex(this.transform.childCount - 2);
+	}
+	
+	public void CloseAll(int a) 
+	{
+		for (int i=0;i<transform.childCount;i++) 
+		{
+			if (i == a) {
+				outlines.GetChild(i).gameObject.SetActive(!outlines.GetChild(i).gameObject.active);
+				continue;
+			}
+			if (transform.GetChild(i).gameObject.TryGetComponent<ListItemExpander>(out ListItemExpander expander))
+			{
+				expander.Expand(-1);
+			}
+			outlines.GetChild(i).gameObject.SetActive(false);
+		}
 	}
 }

@@ -17,12 +17,24 @@ public class buttonSpriteChanger : MonoBehaviour
 		buttonSprite = this.GetComponent<Image>();
 	}
 	
-	public void ChangeSprite() 
+	public void ChangeSprite(int a) 
 	{
-		if (clicked) buttonSprite.sprite = sprite2;
-		else buttonSprite.sprite = sprite1;
-		
-		clicked = !clicked;
+		switch (a)
+		{
+		case 0:
+			buttonSprite.sprite = sprite1;
+			clicked = true;
+			break;
+		case 1:
+			buttonSprite.sprite = sprite2;
+			clicked = false;
+			break;
+		case -1:		
+			if (clicked) buttonSprite.sprite = sprite2;
+			else buttonSprite.sprite = sprite1;
+			clicked = !clicked;
+			break;
+		}
 	}
 		
 }
