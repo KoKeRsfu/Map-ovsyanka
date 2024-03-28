@@ -12,7 +12,7 @@ public class HeaderButton : MonoBehaviour
 
 	private void OnClick()
 	{
-		transform.parent.parent.GetComponent<HideIconsButton>().Outlines();
+		transform.parent.parent.GetComponent<HideIconsButton>().HeaderButton();
 	}
 	
 }
