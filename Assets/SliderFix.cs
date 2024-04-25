@@ -15,6 +15,6 @@ public class SliderFix : MonoBehaviour
 	private IEnumerator Fix() 
 	{
 		yield return new WaitForSeconds(0.05f);
-		scroll.size = 0;
+		scroll.size = 0f;
 	}
 }

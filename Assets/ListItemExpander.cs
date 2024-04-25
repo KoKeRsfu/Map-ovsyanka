@@ -6,12 +6,15 @@ using TMPro;
 
 public class ListItemExpander : MonoBehaviour
 {
+	public int iconId;
 	private GameObject content;
 	private Image numberIcon;
 	private TextMeshProUGUI number;
 	private TextMeshProUGUI name;
 	private GameObject lineTop;
 	private GameObject lineBottom;
+	
+	string numbericonpath;
 	
 	void Start()
 	{
@@ -21,6 +24,9 @@ public class ListItemExpander : MonoBehaviour
 		numberIcon = transform.GetChild(1).GetChild(0).GetComponent<Image>();
 		number = transform.GetChild(1).GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
 		name = transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>();
+	
+		numbericonpath = "Ovsyanka_Map/houseIcons/houseIcon" + iconId + "_0";
+		numberIcon.sprite = Resources.Load<Sprite>(numbericonpath);
 	}
 
 
@@ -32,7 +38,8 @@ public class ListItemExpander : MonoBehaviour
 			lineTop.SetActive(false);
 			lineBottom.SetActive(false);
 			
-			numberIcon.color = new Color(1,1,1,1);
+			numbericonpath = "Ovsyanka_Map/houseIcons/houseIcon" + iconId + "_0";
+			numberIcon.sprite = Resources.Load<Sprite>(numbericonpath);
 			number.color = new Color(0,0,0,1);
 			name.color = new Color(0,0,0,1);
 			return;
@@ -40,21 +47,26 @@ public class ListItemExpander : MonoBehaviour
 		
 		if (content.activeSelf)
 		{
+			transform.parent.GetComponent<HideIconsButton>().HeaderButton(1);
+			
 			content.SetActive(false);
 			lineTop.SetActive(false);
 			lineBottom.SetActive(false);
 			
-			numberIcon.color = new Color(1,1,1,1);
+			numbericonpath = "Ovsyanka_Map/houseIcons/houseIcon" + iconId + "_0";
+			numberIcon.sprite = Resources.Load<Sprite>(numbericonpath);
 			number.color = new Color(0,0,0,1);
 			name.color = new Color(0,0,0,1);
 		}
 		else
 		{
+			transform.parent.GetComponent<HideIconsButton>().HeaderButton(0);
 			content.SetActive(true);
 			lineTop.SetActive(true);
 			lineBottom.SetActive(true);
 			
-			numberIcon.color = new Color(0.22f,0.45f,1,1);
+			numbericonpath = "Ovsyanka_Map/houseIcons/houseIcon" + iconId + "_1";
+			numberIcon.sprite = Resources.Load<Sprite>(numbericonpath);
 			number.color = new Color(1,1,1,1);
 			name.color = new Color(0.22f,0.45f,1,1);
 		}

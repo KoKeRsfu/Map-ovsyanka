@@ -27,14 +27,10 @@ public class ContentAdder : MonoBehaviour
 	    for (int i = 0; i<content.Length; i++) 
 	    {
 	    	if (content[i] == lineEnd[0]) 
-	    	{
-	    		if (current[0] == plus[0]) 
-	    		{
-	    			string photoPath = "Ovsyanka_Map/Photos/" + currentItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text;
-		    		currentItem.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(photoPath);
-	    		}
-	    		else Destroy(currentItem.transform.GetChild(2).GetChild(0).gameObject);
-	    		
+	    	{    		
+		    	Debug.Log("текущая строка - " + current);
+		    	currentItem.GetComponent<ListItemExpander>().iconId = int.Parse(current);
+		    	
 	    		content_n = 0;
 	    		current = "";
 	    		
@@ -61,7 +57,15 @@ public class ContentAdder : MonoBehaviour
 	    				currentItem.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = current;
 	    			}
 	    			else Destroy(currentItem.transform.GetChild(2).GetChild(1).gameObject);
-		    			break;
+		    		break;
+	    		case 5:
+		    		if (current[0] == plus[0]) 
+		    		{
+			    		string photoPath = "Ovsyanka_Map/Photos/" + currentItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text;
+			    		currentItem.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(photoPath);
+		    		}
+		    		else Destroy(currentItem.transform.GetChild(2).GetChild(0).gameObject);
+	    			break;
 	    		}
 	    		current = "";
 	    	}
@@ -70,14 +74,8 @@ public class ContentAdder : MonoBehaviour
 	    		current = current + content[i];		
 	    	}
 	    }
-	    
-	    if (current[0] == plus[0]) 
-	    {
-		    string photoPath = "Ovsyanka_Map/Photos/" + currentItem.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text;
-		    currentItem.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(photoPath);
-	    }
-	    else Destroy(currentItem.transform.GetChild(2).GetChild(0).gameObject);
-	    		
+	    	
+	    currentItem.GetComponent<ListItemExpander>().iconId = int.Parse(current);	
     }
     
 	private GameObject CreateItem() 
@@ -98,14 +96,29 @@ public class ContentAdder : MonoBehaviour
 		for (int i=0;i<transform.childCount;i++) 
 		{
 			if (i == a) {
-				outlines.GetChild(i).gameObject.SetActive(!outlines.GetChild(i).gameObject.active);
+				if (outlines.GetChild(i).GetChild(0).GetComponent<Image>().color.a == 1) 
+				{
+					outlines.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1,1,1,0);
+					outlines.GetChild(i).GetComponent<Image>().enabled = false;
+				}
+				else 
+				{
+					outlines.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1,1,1,1);
+					outlines.GetChild(i).GetComponent<Image>().enabled = true;
+				}
+				if (transform.GetChild(i).gameObject.TryGetComponent<ListItemExpander>(out ListItemExpander exp))
+				{
+					exp.Expand(0);
+				}
 				continue;
 			}
 			if (transform.GetChild(i).gameObject.TryGetComponent<ListItemExpander>(out ListItemExpander expander))
 			{
 				expander.Expand(-1);
 			}
-			outlines.GetChild(i).gameObject.SetActive(false);
+			if (outlines.GetChild(i).childCount == 0) continue;
+			outlines.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1,1,1,0);
+			outlines.GetChild(i).GetComponent<Image>().enabled = false;
 		}
 	}
 }

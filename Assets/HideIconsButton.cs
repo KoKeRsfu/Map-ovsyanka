@@ -5,88 +5,95 @@ using UnityEngine.UI;
 
 public class HideIconsButton : MonoBehaviour
 {
+	
 	public int currentState = 0;
-	//0 - открытые иконки, 1 - открытые улицы, 2 - открыт дом, 3 - ничего не открыто
+	//0 - открытые иконки, 1 - открытые улицы, 2 - открыт дом
 	
 	bool iconsWereActive = false;
 	
+	[SerializeField] Button mapSlider;
+	
+	[SerializeField] GameObject closeHousesButton;
 	[SerializeField] GameObject icons;
 	[SerializeField] GameObject iconPanels;
-	[SerializeField] GameObject iconsButton;
-	[SerializeField] GameObject streetsButton;
+
 	[SerializeField] GameObject streets;
 	
 	
-	public void HeaderButton() 
-	{
-		switch (currentState) 
-		{
-		case 2:
-			iconsButton.GetComponent<Button>().interactable = true;
-			streetsButton.GetComponent<Button>().interactable = true;
-			icons.GetComponent<Icons>().ShowIcons();
-			currentState = 0;
-			break;
-		
-		default:
-			streetsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
-			iconsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
-			iconsButton.GetComponent<Button>().interactable = false;
-			streetsButton.GetComponent<Button>().interactable = false;
-			icons.GetComponent<Icons>().HideIcons();
-			streets.SetActive(false);
-			currentState = 2;
-			break;
-		
-		
-		}
-	}
-	
-	public void StreetsButton() 
+	public void MapSlider()
 	{
 		switch (currentState) 
 		{
 		case 0:
-			streetsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(1);
-			iconsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(1);
 			streets.SetActive(true);
 			icons.GetComponent<Icons>().HideIcons();
+			mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(1);
 			currentState = 1;
 			break;
 		case 1:
-			streetsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
-			iconsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
 			streets.SetActive(false);
 			icons.GetComponent<Icons>().ShowIcons();
+			mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
 			currentState = 0;
-			break;
-		case 3:
-			currentState = 0;
-			StreetsButton();
 			break;
 		}
 	}
 	
-	public void IconsButton() 
+	public void CloseHousesButton() 
 	{
-		switch (currentState) 
+			closeHousesButton.SetActive(false);
+
+			streets.SetActive(false);
+		icons.GetComponent<Icons>().ShowIcons();
+			
+		mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
+		mapSlider.interactable = true;
+			
+			currentState = 0;
+
+		this.GetComponent<ContentAdder>().CloseAll(-1);
+	}
+	
+	public void HeaderButton(int a) 
+	{
+		switch (a) 
 		{
-		case 0:
-			iconsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(1);
-			icons.GetComponent<Icons>().HideIcons();
-			currentState = 3;
-			break;
 		case 1:
-			streetsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
-			iconsButton.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
+			closeHousesButton.SetActive(false);
+
 			streets.SetActive(false);
 			icons.GetComponent<Icons>().ShowIcons();
+			
+			mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(0);
+			mapSlider.interactable = true;
+			
 			currentState = 0;
 			break;
-		case 3:
-			currentState = 1;
-			IconsButton();
+		
+		case 0:
+			closeHousesButton.SetActive(true);
+
+			mapSlider.interactable = false;
+			mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(2);
+
+			streets.SetActive(false);
+			icons.GetComponent<Icons>().HideIcons();
+			currentState = 2;
 			break;
+
 		}
+	}
+	
+	public void HouseClick() 
+	{
+		
+		closeHousesButton.SetActive(true);
+
+		mapSlider.interactable = false;
+		mapSlider.GetComponent<buttonSpriteChanger>().ChangeSprite(2);
+
+		streets.SetActive(false);
+		icons.GetComponent<Icons>().HideIcons();
+		currentState = 2;
 	}
 }
