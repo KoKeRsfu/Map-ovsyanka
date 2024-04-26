@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8adb1d98a68361d429575351382d17ca
+guid: c6880ca29714b874294291c2488bdb5d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -53,7 +53,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -135,76 +135,11 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: -5, y: 23}
-      - {x: -38, y: 8}
-      - {x: -38, y: 1}
-      - {x: -4, y: -23}
-      - {x: 7, y: -23}
-      - {x: 38, y: -9}
-      - {x: 38, y: 1}
-      - {x: 26, y: 13}
-      - {x: 17, y: 13}
-      - {x: 1, y: 23}
-    physicsShape:
-    - - {x: -21, y: 23}
-      - {x: -38, y: 16}
-      - {x: -38, y: -10}
-      - {x: -12, y: -23}
-      - {x: 21, y: -23}
-      - {x: 38, y: -11}
-      - {x: 38, y: 5}
-      - {x: 16, y: 23}
-    - - {x: -6, y: -13}
-      - {x: -7, y: -13}
-      - {x: -9, y: -11}
-      - {x: -10, y: -11}
-      - {x: -12, y: -9}
-      - {x: -13, y: -9}
-      - {x: -15, y: -7}
-      - {x: -16, y: -7}
-      - {x: -18, y: -4}
-      - {x: -22, y: -2}
-      - {x: -26, y: 1}
-      - {x: -27, y: 1}
-      - {x: -31, y: 4}
-      - {x: -31, y: 5}
-      - {x: -29, y: 6}
-      - {x: -27, y: 6}
-      - {x: -22, y: 9}
-      - {x: -20, y: 9}
-      - {x: -15, y: 12}
-      - {x: -13, y: 12}
-      - {x: -8, y: 15}
-      - {x: -6, y: 15}
-      - {x: -2, y: 17}
-      - {x: -1, y: 15}
-      - {x: 4, y: 13}
-      - {x: 6, y: 11}
-      - {x: 9, y: 10}
-      - {x: 11, y: 8}
-      - {x: 16, y: 6}
-      - {x: 23, y: 6}
-      - {x: 24, y: 5}
-      - {x: 24, y: 4}
-      - {x: 31, y: -3}
-      - {x: 32, y: -3}
-      - {x: 33, y: -4}
-      - {x: 32, y: -4}
-      - {x: 29, y: -6}
-      - {x: 27, y: -6}
-      - {x: 24, y: -8}
-      - {x: 22, y: -8}
-      - {x: 19, y: -10}
-      - {x: 17, y: -10}
-      - {x: 12, y: -13}
-      - {x: 10, y: -13}
-      - {x: 2, y: -17}
-      - {x: -1, y: -17}
-      - {x: -1, y: -16}
+    outline: []
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []

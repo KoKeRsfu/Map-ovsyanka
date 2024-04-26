@@ -10,6 +10,8 @@ public class OutlinestoContent : MonoBehaviour
 	[SerializeField] RectTransform contentPanel;
 
 	[SerializeField] GameObject Content;
+	
+	public int lastIndex;
 
 	public void Outline() 
 	{
@@ -18,11 +20,28 @@ public class OutlinestoContent : MonoBehaviour
 			if (transform.GetChild(i).childCount == 0) continue;
 			
 			if (transform.GetChild(i).GetComponent<Image>().enabled)
-			{
+			{		
+				if (lastIndex == i)
+				{
+					Content.GetComponent<HideIconsButton>().CloseHousesButton();
+					return;
+				}
+				lastIndex = i;
 				Content.GetComponent<HideIconsButton>().HouseClick();
 				Content.GetComponent<ContentAdder>().CloseAll(i);
 				SnapTo(Content.transform.GetChild(i-1).GetComponent<RectTransform>());
 				return;
+			}
+		}
+	}
+	
+	public void DisableOutlineImages() 
+	{
+		for (int i=0;i<transform.childCount;i++) 
+		{
+			if (transform.GetChild(i).TryGetComponent<Image>(out Image a))
+			{
+				a.enabled = false;
 			}
 		}
 	}

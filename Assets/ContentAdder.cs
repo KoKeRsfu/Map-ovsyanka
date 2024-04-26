@@ -95,6 +95,11 @@ public class ContentAdder : MonoBehaviour
 	{
 		for (int i=0;i<transform.childCount;i++) 
 		{
+			if (transform.GetChild(i).gameObject.TryGetComponent<ListItemExpander>(out ListItemExpander expander))
+			{
+				expander.Expand(-1);
+			}
+			
 			if (i == a) {
 				if (outlines.GetChild(i).GetChild(0).GetComponent<Image>().color.a == 1) 
 				{
@@ -112,10 +117,7 @@ public class ContentAdder : MonoBehaviour
 				}
 				continue;
 			}
-			if (transform.GetChild(i).gameObject.TryGetComponent<ListItemExpander>(out ListItemExpander expander))
-			{
-				expander.Expand(-1);
-			}
+
 			if (outlines.GetChild(i).childCount == 0) continue;
 			outlines.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1,1,1,0);
 			outlines.GetChild(i).GetComponent<Image>().enabled = false;

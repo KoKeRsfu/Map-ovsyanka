@@ -41,6 +41,8 @@ public class HideIconsButton : MonoBehaviour
 	
 	public void CloseHousesButton() 
 	{
+		Debug.Log("Фон");
+		
 			closeHousesButton.SetActive(false);
 
 			streets.SetActive(false);
